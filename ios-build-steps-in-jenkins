@@ -1,0 +1,517 @@
+
+===============================================================================================
+To create a Backup file of HM.ipa after successfully iOS Build in Jenkins:
+
+cp HM.ipa ~/Desktop/"iOS Applicaiton Build via Automation"/iOS_LIVE/HM.ipa.`date +"%m_%d_%Y"`
+
+cp HM.ipa ~/Desktop/"iOS Applicaiton Build via Automation"/iOS_UAT/HM.ipa.`date +"%m_%d_%Y"`
+
+zip www-out-0.log.`date +"%m_%d_%Y"`.zip www-out-0.log
+
+
+===============================================================================================
+To Change Bundle Identifier in Xcode :
+
+First Verify the Bundle ID:
+
+grep -i "PRODUCT_BUNDLE_IDENTIFIER" project.pbxproj
+-----------------------------------------------------------------------------------
+UAT to LIVE:
+
+sed -i '' 's/clovityhmeuatjune/clovityhmelive/g' HM.xcodeproj/project.pbxproj
+-----------------------------------------------------------------------------------
+LIVE to UAT:
+
+sed -i '' 's/clovityhmelive/clovityhmeuatjune/g' HM.xcodeproj/project.pbxproj
+
+Re-verify the Bundle ID:
+
+grep -i "PRODUCT_BUNDLE_IDENTIFIER" HM.xcodeproj/project.pbxproj
+===========================================================================================
+export UNLOCK_SECKEY_PASSWORD=$Unlock_Pass
+export FASTLANE_PASSWORD=$Fastlane_Pass
+export LC_ALL=en_US.UTF-8;export LANG=en_US.UTF-8
+npm install --save react-native@0.55.0
+npm install
+#cp -f ~/webServices.js src/services/
+#cd ios
+cd ~/.jenkins/workspace/iOS_Build_LIVE/ios
+#cp -f ~/Appfile fastlane/
+#cp -f ~/HubInfo.h .
+#cp -f ~/HM.app.xcent ~/Library/Developer/Xcode/DerivedData/HM-dzflykygjbtmpxacsejdypyispxy/Build/Intermediates.noindex/ArchiveIntermediates/HM/IntermediateBuildFilesPath/HM.build/Release-iphoneos/HM.build/
+#security unlock-keychain login.keychain
+fastlane beta
+ 
+============================================================================================
+ 
+ mdfind kMDItemCFBundleIdentifier ="com.clovityhmelive.com"
+ 
+Clovitys-MacBook-Air:HM.xcodeproj jenkins$ grep -i "PRODUCT_BUNDLE_IDENTIFIER" project.pbxproj
+                                PRODUCT_BUNDLE_IDENTIFIER = com.clovityhmeuatjune.com;
+                                PRODUCT_BUNDLE_IDENTIFIER = com.clovityhmeuatjune.com;
+Clovitys-MacBook-Air:HM.xcodeproj jenkins$
+ 
+ 
+Line Number:
+ 
+1384                                 PRODUCT_BUNDLE_IDENTIFIER = com.clovityhmeuatjune.com;
+
+For Example:
+sed -i '' 's/com.mnm.SpaceCells/com.mnm.BitriseTest/g' SpaceCells.xcodeproj/project.pbxproj
+
+Now, do it in original file:
+
+sed -i '' 's/clovityhmeuatjune/clovityhmelive/g' ~/trunk/ios/HM.xcodeproj/project.pbxproj
+
+-----------------------------------------------------------------------------------------
+I have done it on MacBook Air on 13th November 2018:
+
+Clovitys-MacBook-Air:Desktop jenkins$ sed -i '' 's/clovityhmeuatjune/clovityhmelive/g' project.pbxproj
+Clovitys-MacBook-Air:Desktop jenkins$ grep -i "PRODUCT_BUNDLE_IDENTIFIER" project.pbxproj
+                                PRODUCT_BUNDLE_IDENTIFIER = com.clovityhmelive.com;
+                                PRODUCT_BUNDLE_IDENTIFIER = com.clovityhmelive.com;
+Clovitys-MacBook-Air:Desktop jenkins$
+
+
+==========================================================================================
+Tested iOS_Build_Live on local path without SVN:
+
+export UNLOCK_SECKEY_PASSWORD=$Unlock_Pass
+export FASTLANE_PASSWORD=$Fastlane_Pass
+export LC_ALL=en_US.UTF-8;export LANG=en_US.UTF-8
+npm install --save react-native@0.55.0
+npm install
+cp -f ~/webServices.js ~/.jenkins/workspace/iOS_Build_LIVE/src/services/
+cd ~/.jenkins/workspace/iOS_Build_LIVE/ios/
+cp -f ~/Appfile fastlane/
+#cp -f ~/HubInfo.h .
+#cp -f ~/HM.app.xcent /Users/svc-cloud/Library/Developer/Xcode/DerivedData/HM-dzflykygjbtmpxacsejdypyispxy/Build/Intermediates.noindex/ArchiveIntermediates/HM/IntermediateBuildFilesPath/HM.build/Release-iphoneos/HM.build/
+#security unlock-keychain login.keychain
+fastlane beta
+
+
+/Users/svc-cloud/Library/Developer/Xcode/DerivedData/HM-aheggbszqfczsmeawqvliphptkzf/Build/Intermediates.noindex/ArchiveIntermediates/HM/IntermediateBuildFilesPath/HM.build/Release-iphoneos/HM.build
+=============================================================================================
+How to open a Binary File in Linux:
+
+Open the file in Vim.
+Run the command
+
+:% ! xxd
+
+Edit.
+Once done, run
+
+:% ! xxd -r
+
+Save.
+
+2)
+
+xxd Info.plist or info.bin
+
+
+=============================================================================================
+
+build logs path in Jenkins:
+
+/Users/svc-cloud/.jenkins/jobs/iOS_Build_LIVE/builds/lastSuccessfulBuild/log
+============================================================================
+
+iOS Build for LIVE:
+------------------------------------------------
+To change the identifier in Xcode GUI file:
+
+/Users/svc-cloud/Library/Developer/Xcode/DerivedData/HM-dzflykygjbtmpxacsejdypyispxy/Build/Intermediates.noindex/ArchiveIntermediates/HM/IntermediateBuildFilesPath/HM.build/Release-iphoneos/HM.build
+
+vi HM.app.xcent
+==================================================
+export UNLOCK_SECKEY_PASSWORD=$Unlock_Pass
+export FASTLANE_PASSWORD=$Fastlane_Pass
+export LC_ALL=en_US.UTF-8;export LANG=en_US.UTF-8
+npm install --save react-native@0.55.0
+npm install
+cp -f ~/webServices.js src/services/
+cd ios
+cp -f ~/Appfile fastlane/
+cp -f ~/HubInfo.h .
+security unlock-keychain login.keychain
+fastlane sigh -a com.clovityhmelive.com -u hme.qtest01@gmail.com
+fastlane beta
+
+
+=====================================================
+export LC_ALL=en_US.UTF-8;export LANG=en_US.UTF-8
+the full process:
+
+> rm -rf ~/.rncache  
+> rm -rf node_modules
+> yarn install
+> react-native run-ios 
+
+xcodebuild -showBuildSettings |grep -i bitcode
+==========================================================
+security unlock-keychain login.keychain
+or
+security unlock-keychain ~/Library/Keychains/login.keychain
+2o00&HCxOgd$I
+
+hme.qtest01@gmail.com
+HMEAdmin197!
+=========================================================
+Latest- 17th October 2018
+-------------------------
+hmedtc-mac01:fastlane svc-cloud$ cat Fastfile
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+xcversion(version: "9.2")
+xcode_select "/Applications/Xcode.app"
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+ # Selects Xcode 9.2
+    # increment_build_number(xcodeproj: "HM.xcodeproj")
+   get_certificates
+    get_provisioning_profile
+    get_version_number
+    get_build_number
+    increment_build_number(
+      build_number: "67"
+      )
+     build_app(
+    scheme: "HM",
+    export_method: "app-store",
+sdk:"iphoneos11.2" # iOS 11.2
+)
+    upload_to_testflight
+  end
+end
+hmedtc-mac01:fastlane svc-cloud$ exit
+
+=========================================================
+export FASTLANE_PASSWORD=$Fastlane_Pass
+export LC_ALL=en_US.UTF-8;export LANG=en_US.UTF-8
+cd /Users/svc-cloud/trunk/ios
+sudo gem install -n /usr/local/bin fastlane
+fastlane env
+fastlane beta
+
+
+=========================================================
+To install fastlane on a particular path in Mac:
+
+#suod gem intall -n /usr/local/bin/ fastlane
+
+
+xcversion select 9 --symlink
+
+sudo gem install -n /usr/local/bin fastlane
+
+xcversion select 9 --symlink
+
+fastlane action xcode_select
+
+xcode-select -p
+
+sudo mdutil -i on 
+
+https://github.com/KrauseFx/xcode-install
+
+https://github.com/fastlane/fastlane/issues/8671
+
+===================================================
+To mention a particular Build No. in Fastfile to resolve the build number issue:
+--------------------------------------------------------------------------------
+
+hmedtc-mac01:fastlane svc-cloud$ cat Fastfile
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+ update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+increment_build_number(
+build_number:"56" #this is the line where we can change the build number
+)
+    #increment_build_number(xcodeproj: "HM.xcodeproj")
+    get_certificates
+    get_provisioning_profile
+    get_version_number
+    build_app(
+    scheme: "HM",
+    export_method: "app-store"
+)
+    upload_to_testflight
+  end
+end
+hmedtc-mac01:fastlane svc-cloud$
+-----
+===============================================
+Isuue:
+
+hmedtc-mac01:ios svc-cloud$ sudo gem install fastlane
+ERROR:  While executing gem ... (Gem::FilePermissionError)
+    You don't have write permissions for the /usr/bin directory.
+hmedtc-mac01:ios svc-cloud$ gem -v
+
+
+Solution:
+
+sudo gem install fastlane -n /usr/local/bin
+
+============================================================================================
+SVN URL:
+
+https://hmesvn.hme.com/svn/HME/QSR/AZURE/HMEPulse_MobileApp/HMEPulse_MobileApp_Client/trunk
+
+Used in Android Build:
+
+https://192.175.52.181/svn/HME/QSR/AZURE/HMEPulse_MobileApp/HMEPulse_MobileApp_Client/trunk
+
+==============================================================
+/usr/bin/xcodebuild
+/usr/bin/agvtool
+/usr/bin/xcrun
+
+To find timezone on MAC OS:
+
+hmedtc-mac01:~ svc-cloud$ sudo systemsetup -gettimezone
+Time Zone: America/Los_Angeles
+hmedtc-mac01:~ svc-cloud$
+========================================================
+UAT:
+Apple ID 
+1394329208
+
+LIVE:
+Apple ID 
+1364773030
+
+https://apiumhub.com/tech-blog-barcelona/ios-continuous-integration/
+====================================================================================================
+iOS Build Pre-requiste which is we use:
+---------------------------------------
+hme.qtest01@gmail.com
+Fastlane_Pass 
+HMEAdmin197!
+
+UAT Identifier:
+com.clovityhmeuatjune.com
+Team ID:
+B8SX3Q6A3N
+
+====================================================================================================
+Steps have been suggested by Dinesh Sharma on 5th of October 2018
+-----------------------------------------------------------------
+
+NO.1 Step:
+----------
+rm -rf fastlane
+rm clovity.mobileprovision
+rm Development_16cd9461-ffe9-416f-84a3-90a6749296cc_com.clovityhmelive.com.mobileprovision
+rm -rf build
+=====================================================================================================
+NO.2 Step:
+----------
+execute the command : 
+
+$fastlane -v
+
+$fastlane init .
+=======================================================================================================
+NO.3 Step:
+----------
+cd ~/trun/ios/fastlane
+
+vi Fastfile
+
+then paste below content in Fastfile
+
+========================================================================================================
+Clovitys-MacBook-Air:~ clovity$ cat test1
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
+    increment_build_number(xcodeproj: "HM.xcodeproj")
+    get_certificates
+    get_provisioning_profile
+    get_version_number
+    build_app(scheme: "HM",
+   export_method: "app-store"
+  )
+    upload_to_testflight
+  end
+end
+
+Clovitys-MacBook-Air:~ clovity$
+
+
+Steps have been suggested by Dinesh Sharma on 5th of October 2018
+-----------------------------------------------------------------
+========================================================================
+
+
+export LC_ALL=en_US.UTF-8;export LANG=en_US.UTF-8
+
+
+Fastlane_Pass 
+HMEAdmin197!
+
+export UNLOCK_SECKEY_PASSWORD=$Unlock_Pass
+security unlock-keychain login.keychain
+
+
+export FASTLANE_PASSWORD=$Fastlane_Pass
+export LC_ALL=en_US.UTF-8;export LANG=en_US.UTF-8
+export PATH=$PATH:/usr/bin/
+export PATH=$PATH:/usr/local/bin/
+cd /Users/clovity/trunk/ios
+security unlock-keychain login.keychain
+fastlane beta
+=========================================================================================
+date: 3rd Oct - 2018:
+A default keychain could not be found:
+1) yarn add react-native-keychain
+
+
+
+fastlane sigh -a com.clovityhmelive.com -u hme.qtest01@gmail.com
+
+
+/usr/local/bin/fastlane env
+/usr/local/bin/fastlane sigh -a com.clovityhmeuatjune.com -u hme.qtest01@gmail.com
+
+/usr/local/bin/fastlane sigh -a com.clovityhmeuatjune.com -q hme.qtest01@gmail.com
+
+/usr/local/bin/fastlane beta
+
+rm -rf AppStore_com.NEWHMEClovity.com.mobileprovision
+
+Needs to be setup product Module Name in XCode Software
+
+-----------------------------------------------
+
+export FASTLANE_PASSWORD=$Fastlane_Pass
+export LC_ALL=en_US.UTF-8  
+export LANG=en_US.UTF-8
+cd /Users/clovity/trunk/ios
+/usr/local/bin/fastlane env
+/usr/local/bin/fastlane beta
+
+============================================
+sudo su -m _xcsbuildd
+mkdir -p ~/Library/Keychains/
+security create-keychain -p password ~/Library/Keychains/Login.keychain
+security login-keychain -d user -s ~/Library/Keychains/Login.keychain 
+security default-keychain -s $KEYCHAIN
+
+============================================
+To set UAT and LIVE Identifier:
+
+https://docs.fastlane.tools/actions/sigh/
+
+/usr/local/bin/fastlane sigh -a com.clovityhmeuatjune.com -u hme.qtest01@gmail.com
+
+
+==========================================================================================
+sudo npm install -g create-react-native-app
+sudo npm audit fix
+sudo npm install -g npm-install-peers
+
+---------------------------------------
+
+hmedtc-mac01:ios svc-cloud$ security find-identity -v -p codesigning
+  1) 7030BBF2EA0ADAF399641F946BAE9D78FF0BBB84 "iPhone Developer: HM Electronics (H7NW4ZE62Z)"
+  2) 8C5F908705C464F16BEF84B6BEC21C655B33E10F "iPhone Distribution: HM Electronics (B8SX3Q6A3N)"
+  3) 4DAB820FC45567CF24B906B399A7BB3095AD746C "iPhone Developer: HM Electronics (H7NW4ZE62Z)" (CSSMERR_TP_CERT_REVOKED)
+  4) E2C826ED27A235F1A13D1BC19F26A1B22D431CE5 "iPhone Developer: HM Electronics (H7NW4ZE62Z)" (CSSMERR_TP_CERT_REVOKED)
+  5) DABE2C78AF99929AF2148F79F4810022DB69CE4D "iPhone Distribution: HM Electronics (B8SX3Q6A3N)" (CSSMERR_TP_CERT_REVOKED)
+  6) 9076C46F67744B81AAFB95B0CF08407E72469264 "iPhone Developer: HM Electronics (H7NW4ZE62Z)"
+  7) C9A17CD5F7E2C8F304C1161969A028F67AF70885 "iPhone Distribution: HM Electronics (B8SX3Q6A3N)"
+     7 valid identities found
+hmedtc-mac01:ios svc-cloud$
+
+==========================================================================================================================
+
+To check xcode version on mac terminal:
+
+hmedtc-mac01:~ svc-cloud$ /usr/bin/xcodebuild -version
+Xcode 10.0
+Build version 10A255
+hmedtc-mac01:~ svc-cloud$
+
+hmedtc-mac01:~ svc-cloud$ xcodebuild -version
+Xcode 10.0
+Build version 10A255
+
+----------------------
+
+To find xcode path on mac terminal:
+
+hmedtc-mac01:~ svc-cloud$ xcode-select --print-path
+/Applications/Xcode.app/Contents/Developer
+
+
+------------------------
+hmedtc-mac01:~ svc-cloud$ system_profiler SPSoftwareDataType
+Software:
+
+    System Software Overview:
+
+      System Version: macOS 10.13.6 (17G65)
+      Kernel Version: Darwin 17.7.0
+      Boot Volume: HDD
+      Boot Mode: Normal
+      Computer Name: HMEDTC-MAC01
+      User Name: HME CLOUD SVC (svc-cloud)
+      Secure Virtual Memory: Enabled
+      System Integrity Protection: Enabled
+      Time since boot: 49 days 15:48
+
+hmedtc-mac01:~ svc-cloud$
